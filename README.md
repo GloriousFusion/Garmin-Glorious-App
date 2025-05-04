@@ -1,0 +1,1 @@
+Garmin Glorious App (Music), is an application made for Linux that makes adding media to a garmin watch easier and automated, currently functions as a way to add music content from a url or local directory, while providing the ability to sort music by genre/playlist for maintaining a clean directory structure on the watch.
