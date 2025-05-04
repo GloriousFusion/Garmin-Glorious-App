@@ -4,6 +4,12 @@
 
 - Tested on Debian 12 (KDE), contribute to confirm working status on other systems.
 
+#### ☰ Tasks:
+- [ ] Android compatibility (via USB OTG)
+- [ ] Get playlists or files (from watch instead of cache/temp)
+- [ ] Options menu (for settings.py)
+- [ ] Expand for podcasts, maps etc.
+
 #### ✈︎ Installation:
 - `pip install -r requirements.txt`
 
@@ -11,12 +17,21 @@
 - pymtp-gf: https://github.com/GloriousFusion/pymtp-gf/releases
 
 #### 🕮 Description:
-Garmin Glorious App (Music), is an application made for Linux that makes adding media to a garmin watch easier and automated, currently functions as a way to add music content from a url or local directory, while providing the ability to sort music by genre/playlist for maintaining a clean directory structure on the watch.
+
+- Add music and playlists without the use of garmin express, windows media player etc.
+
+- Sync, add custom tracks, stack, name playlists in any way you want.
+
+- Skip registrations, ads and proprietary systems (FUTO inspired).
+
+<img src="images/desc01.png" width="480"/>
 
 #### ⚝ Credits:
 - pymtp: https://github.com/eighthave/pymtp
 
 - yt-dlp: https://github.com/yt-dlp/yt-dlp
+
+- kivy: https://github.com/kivy/kivy
 
 - orbitron font: https://github.com/theleagueof/orbitron
 
