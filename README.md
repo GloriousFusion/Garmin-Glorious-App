@@ -10,11 +10,18 @@
 - [ ] Options menu (for settings.py)
 - [ ] Expand for podcasts, maps etc.
 
-#### ✈︎ Installation:
+#### ✈︎ Installation (Source):
 - `pip install -r requirements.txt`
-
 - `pip install pymtp-gf-0.1.1.tar.gz`
 - pymtp-gf: https://github.com/GloriousFusion/pymtp-gf/releases
+
+#### ✈︎ Installation (Release):
+- latest build: https://github.com/GloriousFusion/Garmin-Glorious-App/releases/tag/build
+
+#### ⿻ Preview:
+<img src="images/preview01.png" width="480"/>
+
+<img src="images/preview02.png" width="480"/>
 
 #### 🕮 Description:
 
