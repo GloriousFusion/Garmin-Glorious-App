@@ -1,6 +1,6 @@
 
 #### ⚠ Notes:
-- Currently, the app can **NOT** modify playlists that are in the watch already (as the playlist files need to be inside the cache folder), make sure to keep and backup all playlist files that are inside the cache folder.
+- Currently, the app can **NOT** get playlists that are in the watch (the playlist files are managed inside the cache folder), make sure to keep and backup all playlist files that are inside the cache folder, **if you want to add tracks into a playlist that is already in your watch (prior to using the app), simply transfer it into the cache folder**.
 
 - Tested on Debian 12 (KDE), contribute to confirm working status on other systems.
 
