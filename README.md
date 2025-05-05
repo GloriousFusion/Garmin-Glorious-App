@@ -6,7 +6,7 @@
 
 #### ☰ Tasks:
 - [ ] Android compatibility (via USB OTG)
-- [ ] Get playlists or files (from watch instead of cache/temp)
+- [ ] Get playlists or files from watch (removing the need to store playlists in cache folder)
 - [ ] Options menu (for settings.py)
 - [ ] Expand for podcasts, maps etc.
 
