@@ -1,7 +1,9 @@
-from scripts.settings import MUSIC_DEFAULT, TEMP_DIRECTORY, BUFFER_TIME
+from scripts.settings import MUSIC_DEFAULT, TEMP_DIRECTORY, BUFFER_TIME, CACHE_DIRECTORY
 
 from pymtp.models import LIBMTP_Track
 from pymtp.errors import CommandFailed
+
+from pathlib import Path
 
 import os
 import time
@@ -63,9 +65,28 @@ def get_folder_id(device, path):
 
     return current_id
 
+def get_file_from_folder(device, folder_id):
+    files = device.get_filelisting()
+    folder_files = [f for f in files if f.parent_id == folder_id]
+    return folder_files
+
 def create_folder_new(device, parent, folder):
     folder_id = device.create_folder(folder.encode(), parent, 0)
     return folder_id
+
+def sync_playlists(device):
+    print("\n [ Syncing Playlists ] \n")
+    music_folder_id = get_folder_id(device, [MUSIC_DEFAULT])
+    if music_folder_id is None:
+        music_folder_id = create_folder_new(device, 0, MUSIC_DEFAULT)
+    music_files = get_file_from_folder(device, music_folder_id)
+    for file in music_files:
+        if file.filename.decode().endswith(".m3u8"):
+            target_path = str(Path(CACHE_DIRECTORY) / file.filename.decode())
+            print(f" [ Synced Playlist: {file.filename.decode()} ]")
+            device.get_file_to_file(file.item_id, target_path.encode("utf-8"))
+        else:
+            print("No Playlists Found.")
 
 def transfer_playlist(device, genre_name, playlist_name, playlist_file, ui, restart_callback, disconnect_callback):
     music_folder_id = get_folder_id(device, [MUSIC_DEFAULT])

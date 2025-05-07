@@ -70,16 +70,16 @@ def get_audio(ui, input_callback, source_type):
         print("[ Invalid source type (change in settings). ]")
 
 def get_music(ui, input_callback):
-    def on_genre_input(genre_input):
-        genre = genre_input.strip().capitalize() or GENRE_DEFAULT
+    def on_source_input(source_input):
+        source = source_input.strip().lower() or SOURCE_DEFAULT
 
-        def on_playlist_input(playlist_input):
-            playlist = playlist_input.strip().capitalize() or PLAYLIST_DEFAULT
+        def on_genre_input(genre_input):
+            genre = genre_input.strip().capitalize() or GENRE_DEFAULT
 
-            def on_source_input(source_input):
-                source = source_input.strip().lower() or SOURCE_DEFAULT
+            def on_playlist_input(playlist_input):
+                playlist = playlist_input.strip().capitalize() or PLAYLIST_DEFAULT
                 get_audio(ui, lambda: input_callback(genre, playlist), source)
 
-            ui.get_input(f"- Enter Source Type (url or dir) [Default = {SOURCE_DEFAULT}]", on_source_input)
-        ui.get_input(f"- Enter Playlist Name (Dnb1, Classic3 etc.) [Default = {PLAYLIST_DEFAULT}]", on_playlist_input)
-    ui.get_input(f"- Enter Genre Name (Edm, Funk, Chill etc.) [Default = {GENRE_DEFAULT}]", on_genre_input)
+            ui.get_input(f"- Enter Playlist Name (Dnb1, Classic3 etc.) [Default = {PLAYLIST_DEFAULT}]", on_playlist_input)
+        ui.get_input(f"- Enter Genre Name (Edm, Funk, Chill etc.) [Default = {GENRE_DEFAULT}]", on_genre_input)
+    ui.get_input(f"- Enter Source Type (url or dir) [Default = {SOURCE_DEFAULT}]", on_source_input)

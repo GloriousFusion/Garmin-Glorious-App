@@ -1,0 +1,6 @@
+{
+    "ENV_KDE": true,
+    "AUTO_SYNC": true,
+    "GENRE_DEFAULT": "Mix",
+    "SOURCE_DEFAULT": "url"
+}
