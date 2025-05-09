@@ -1,8 +1,13 @@
 
 #### ⚠ Notes:
 ~~- Currently, the app can **NOT** get playlists that are in the watch (the playlist files are managed inside the cache folder), make sure to keep and backup all playlist files that are inside the cache folder, **if you want to add tracks into a playlist that is already in your watch (prior to using the app), simply transfer it into the cache folder**.~~
-- Auto sync is slow, can be disabled once playlists are in cache folder (recommended)
-- Tested only on Debian 12 (KDE)
+- ffmpeg is required (`sudo apt install ffmpeg`)
+
+- Auto-sync is slow, can be disabled once playlists are in cache folder (recommended)
+
+- Tested on Debian 12 (KDE)
+  
+- Tested on Linux Mint 22 (Xfce) [requires manual unmounting]
 
 #### ☰ Tasks:
 - [X] Get playlists or files from watch (removing the need to store playlists in cache folder)
