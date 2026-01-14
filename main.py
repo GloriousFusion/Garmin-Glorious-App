@@ -23,12 +23,13 @@ from kivy.uix.label import Label
 from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.filechooser import FileChooserListView
 
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
 LabelBase.register(name="orbitron_regular", fn_regular="fonts/orbitron_regular.ttf")
 
-import sys
+import sys, os.path
 import threading
 import json
 
@@ -211,6 +212,7 @@ class AppUI(BoxLayout):
 
         self.input_callback = None
         self.device = None
+        self.dir_chooser_callback = None
 
     def on_connect(self, *args):
         clean_temp()
@@ -232,6 +234,73 @@ class AppUI(BoxLayout):
         self.input_field.text = ""
         self.input_callback = callback
         self.input_field.focus = True
+
+    def open_dir_chooser(self, callback):
+        self.dir_chooser_callback = callback
+
+        def open_chooser():
+            filechooser = FileChooserListView()
+            filechooser.dirselect = True
+            filechooser.filters = ["*"]
+
+            content = BoxLayout(orientation="vertical")
+            content.add_widget(filechooser)
+            button_layout = BoxLayout(size_hint_y=None, height=50)
+
+            select_btn = Button(
+                text="Select Directory",
+                background_normal="",
+                background_color=BACKGROUND_COLOR,
+                color=TEXT_COLOR,
+                font_name="orbitron_regular"
+            )
+            cancel_btn = Button(
+                text="Cancel",
+                background_normal="",
+                background_color=BACKGROUND_COLOR,
+                color=TEXT_COLOR,
+                font_name="orbitron_regular"
+            )
+
+            def select_callback(instance):
+                if filechooser.selection:
+                    selected_path = filechooser.selection[0]
+                    if os.path.isfile(selected_path):
+                        selected_path = os.path.dirname(selected_path)
+                    popup.dismiss()
+                    if self.dir_chooser_callback:
+                        self.dir_chooser_callback(selected_path)
+                        self.dir_chooser_callback = None
+                else:
+                    if filechooser.path:
+                        popup.dismiss()
+                        if self.dir_chooser_callback:
+                            self.dir_chooser_callback(filechooser.path)
+                            self.dir_chooser_callback = None
+
+            def cancel_callback(instance):
+                popup.dismiss()
+                if self.dir_chooser_callback:
+                    self.dir_chooser_callback(None)
+                    self.dir_chooser_callback = None
+
+            select_btn.bind(on_release=select_callback)
+            cancel_btn.bind(on_release=cancel_callback)
+
+            button_layout.add_widget(cancel_btn)
+            button_layout.add_widget(select_btn)
+            content.add_widget(button_layout)
+
+            popup = Popup(
+                title="Select Directory with MP3 Files",
+                title_font="orbitron_regular",
+                content=content,
+                size_hint=(0.9, 0.9),
+                background="",
+                background_color=BACKGROUND_COLOR
+            )
+            popup.open()
+        Clock.schedule_once(lambda dt: open_chooser(), 0)
 
     def on_enter(self, instance):
         if self.input_callback:

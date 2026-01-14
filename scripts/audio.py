@@ -5,7 +5,6 @@ import yt_dlp
 from pathlib import Path
 from shutil import copy2
 
-from plyer import filechooser
 from kivy.clock import Clock
 
 ### https://yt-dlp.memoryview.in/docs/embedding-yt-dlp/using-yt-dlp-in-python-scripts#customizing-options ###
@@ -53,7 +52,7 @@ def get_audio(ui, input_callback, source_type):
                 input_callback()
                 return
 
-            dir_path = Path(selection[0])
+            dir_path = Path(selection)
             audio_files = list(dir_path.glob("*.mp3"))
 
             if not audio_files:
@@ -65,7 +64,7 @@ def get_audio(ui, input_callback, source_type):
                 print(f"[ Copied {len(audio_files)} track(s) from {dir_path} ]")
 
             ui.get_input("- Get More Audio? (y/N)", on_repeat_input)
-        filechooser.choose_dir(on_selection=on_dir_selection, title="Select Audio Directory")
+        ui.open_dir_chooser(on_dir_selection)
     else:
         print("[ Invalid source type (change in settings). ]")
 
